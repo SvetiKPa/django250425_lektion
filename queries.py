@@ -151,3 +151,48 @@ from django.db.models import Q
 #
 # for b in data:  # type: Book
 #     print(f"{b.id=}  --  {b.author}  --  {b.published_date}")
+
+from decimal import Decimal
+
+# book = Book.objects.get(id=700)
+#
+# print("BEFORE:")
+# print(book.is_bestseller)
+# print(book.price)
+#
+#
+# book.is_bestseller = True
+# book.price = Decimal("189.97")
+#
+# book.save()
+# print("AFTER:")
+# print(book.is_bestseller)
+# print(book.price)
+
+
+# books = Book.objects.filter(
+#     author__in=["Leo Tolstoy", "Fyodor Dostoevsky"]
+# ).update(is_bestseller=True, price=Decimal("299.99"))
+#
+
+
+# from django.db.models import F
+#
+#
+# books = Book.objects.filter(
+#     author__in=["Leo Tolstoy", "Fyodor Dostoevsky"]
+# ).update(discounted_price=F('price') * 0.80)
+
+
+
+# book_to_delete = Book.objects.get(id=720)
+#
+#
+# book_to_delete.delete()
+#
+#
+#
+# Book.objects.create()
+# Book.objects.bulk_create()
+# Book.objects.bulk_update()
+
