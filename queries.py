@@ -340,3 +340,44 @@ WHERE
     t1.price > avg_price_by_author
 ;
 """
+
+
+from rest_framework import serializers
+from library.models import Category
+
+
+class UserCustomSerializer(serializers.Serializer):
+    name = serializers.CharField(max_length=25)
+    age = serializers.IntegerField(min_value=15)
+    is_active = serializers.BooleanField()
+    created_at = serializers.DateTimeField()
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    # name_categoy = ...
+
+    class Meta:
+        model = Category
+        fields = "__all__"
+        # fields = ["id", "category_name"]
+
+
+raw_data = {
+    "name": "Johnny",
+    "age": 18,
+    "is_active": True,
+    "created_at": "2022-09-17T16:31:15",
+}
+
+
+data = UserCustomSerializer(data=raw_data)
+
+print(data)
+
+
+if data.is_valid():
+    print(data.validated_data)
+
+else:
+    print("ДАННЫЕ НЕВАЛИДНЫ")
+    print(data.errors)
