@@ -10,6 +10,14 @@ from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.decorators import action
 from rest_framework import status
+from rest_framework.permissions import (
+    AllowAny,
+    IsAuthenticated,
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly
+)
+from rest_framework.pagination import CursorPagination
+
 
 from library.models import Publisher
 from library.serializers import (
@@ -17,10 +25,20 @@ from library.serializers import (
     PublisherDetailSerializer,
     PublisherListSerializer
 )
+from paginators import OverrideCursorPaginator
 
 
 class PublisherViewSet(ModelViewSet):
+    permission_classes = [AllowAny]
+    # pagination_class = CursorPagination
+    pagination_class = OverrideCursorPaginator
+    # permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Publisher.objects.all()
+
+    def get_permissions(self):
+        if self.action == 'get_statistic_per_publisher':
+            return [IsAdminUser()]
+        return [AllowAny()]
 
     def get_serializer_class(self):
         if 'list' in self.action:

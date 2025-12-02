@@ -4,6 +4,19 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 django.setup()
 
+
+# from rest_framework.authtoken.models import Token
+# from library.models import User
+#
+# user = User.objects.get(username='vladislav')
+#
+# token, created = Token.objects.get_or_create(user=user)
+#
+# print(created)
+# print(token.user)
+# print(token.key)
+
+
 # from test_app.models import (
 #     Book,
 #     UserProfile
@@ -328,18 +341,18 @@ from django.db.models import (Count, Q)
 #     )
 # )
 
-"""
-SELECT t1.*, (
-        SELECT Avg(t2.price) as avg_price
-        FROM books AS t2
-        WHERE t2.author_id = t1.author_id
-    ) AS avg_price_by_author
-FROM books as t1
-WHERE 
-    author_id = 1 AND
-    t1.price > avg_price_by_author
-;
-"""
+# """
+# SELECT t1.*, (
+#         SELECT Avg(t2.price) as avg_price
+#         FROM books AS t2
+#         WHERE t2.author_id = t1.author_id
+#     ) AS avg_price_by_author
+# FROM books as t1
+# WHERE
+#     author_id = 1 AND
+#     t1.price > avg_price_by_author
+# ;
+# """
 
 #
 # from rest_framework import serializers
@@ -407,9 +420,9 @@ WHERE
 # print(book)
 
 
-title = "TEST TITLE"
-
-print(title.replace(" ", "").isalnum())
+# title = "TEST TITLE"
+#
+# print(title.replace(" ", "").isalnum())
 
 # "$#@!_-+=*&^%><?/\|"
 #
@@ -418,11 +431,11 @@ print(title.replace(" ", "").isalnum())
 # print(result)
 
 
-Book.objects.filter(
-    publication_date__year=1997,
-    publication_date__month=7,
-    publication_date__day=5,
-)
+# Book.objects.filter(
+#     publication_date__year=1997,
+#     publication_date__month=7,
+#     publication_date__day=5,
+# )
 
 
 # http://localhost:8000/subtasks/?parent_name=CREATE%20New%20Obj&status=In%20Progres
