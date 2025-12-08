@@ -92,6 +92,16 @@ class UserListCreateGenericView(ListCreateAPIView):
 class RegisterUser(APIView):
     permission_classes = [AllowAny]
 
+    def get(self, request: Request):
+        qs = User.objects.all()
+        serializer = UserListSerializer(qs, many=True)
+
+        return Response(
+            data=serializer.data,
+            status=status.HTTP_200_OK
+        )
+
+
     def post(self, request: Request) -> Response:
         serializer = UserCreateSerializer(data=request.data)
 

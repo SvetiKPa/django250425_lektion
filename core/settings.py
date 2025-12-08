@@ -61,6 +61,17 @@ MIDDLEWARE = [
     # 'custom_middleware.CustomMiddleware'
 ]
 
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST=...
+# EMAIL_PORT=...
+# EMAIL_USE_TLS=...
+# EMAIL_HOST_USER=...
+# EMAIL_HOST_PASSWORD=...
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
 ROOT_URLCONF = 'core.urls'
 AUTH_USER_MODEL = 'library.User'  # чтобы джанго брал новую модель пользователя как базу, а не то, что он предлагает -- нужно переопределить этот парамтр, указав в каком приложении какая модель теперь будет выступать как модель пользователя
 

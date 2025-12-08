@@ -4,6 +4,7 @@ from typing import Any
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
+from library.enums import Role
 from library.models import User
 
 
@@ -28,7 +29,7 @@ class UserListSerializer(serializers.ModelSerializer):
     def to_representation(self, instance: User):
         representation = super().to_representation(instance)
 
-        if self.context['include_related']:
+        if self.context.get('include_related'):
             representation['reviews'] = [
                 {
                     "id": review.id,
@@ -119,6 +120,11 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data: dict[str, Any]) -> User:
         password = validated_data.pop('password')
+        role = validated_data.get('role')
+
+        if role == Role.moderator.lower() or role == Role.admin.lower():
+            validated_data['is_staff'] = True
+
         user = User(**validated_data)
         user.set_password(password)
 
